@@ -2,7 +2,12 @@ const mongoose = require('mongoose');
 const validator=require('validator');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash'); 
+const bcrypt=require('bcryptjs');
 const Schema = mongoose.Schema;
+
+
+
+
 
 const userSchema = new Schema({
   fname: String,
@@ -12,7 +17,7 @@ const userSchema = new Schema({
     required:true,
     trim:true,
     minlength:1, 
-    unique:true,
+    unique:true, 
     validate:{   
       validator:validator.isEmail,
       message:'{VALUE} is not a valid email'
@@ -40,20 +45,6 @@ userSchema.methods.toJSON=function(){
   return _.pick(userObject,['_id','email']);
 }
 
-// userSchema.methods.generateAuthToken = function (){
-//   const user = this;
-//   var access='auth';
-//   var token = jwt.sign({_id : user._id.toHexString(),access},'abc123').toString();
-
-//   user.tokens.push({access,token});
-
-//   user.save().then(()=>{
-//     var tok = token;
-//     console.log(tok);
-//     return tok;
-//   });
-
-// };
 
 userSchema.methods.generateAuthToken = function () {
   const user = this;
@@ -89,7 +80,21 @@ userSchema.statics.findByToken=function(token){
     }
   )
 }
+userSchema.pre('save',function(next){
+    var user = this;
+    if(user.isModified('password')){
+      var password=user.password;
+      bcrypt.genSalt(10,(err,salt)=>{
+        bcrypt.hash(password,salt,(err,hash)=>{
+          user.password=hash;
+          next();
+        }); 
+      });
 
+    }else{
+      next();
+    }
+});
 const User = mongoose.model('User', userSchema);
  
 module.exports = User;
