@@ -15,6 +15,26 @@ router.get('/', (req, res) => {
     });
 });
 
+
+router.get('/catgory', (req, res) => {
+    Catogry.find({}, (err, cats) => {
+        if (!err) {
+            var catMap={value:'',label:''};
+            var cat =[];
+            for(let i=0;i<cats.length;i++){
+                //console.log(cats[i]._id);
+                catMap.value=cats[i]._id;
+                catMap.label=cats[i].name;
+                cat.push(catMap);
+            }
+            res.send(cat);
+        }
+        else{
+            res.send("an error occured");
+        }
+    });
+});
+
 router.get('/books', (req, res) => {
     Book.find({}, (err, books) => {
         if (!err) res.send(books);
@@ -128,7 +148,7 @@ router.put('/catgory/:id', (req, res) => {
     });
 });
 
-router.put('/author/:id', (req, res) => {
+router.post('/author/:id', (req, res) => {
     const fname = req.body.fname;
     const lname = req.body.lname;
     const dataOfBirth = req.body.dataOfBirth;
@@ -142,7 +162,7 @@ router.put('/author/:id', (req, res) => {
     });
 });
 
-router.delete('/book/:id', (req, res) => {
+router.get('/book/:id', (req, res) => {
     const id = req.params.id;
     Book.deleteOne({ _id: id }, (err) => {
         if (!err) res.send('Book Deleted');
