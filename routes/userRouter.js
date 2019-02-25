@@ -74,7 +74,7 @@ router.post('/create', (req, res) => {
     })
 
   });
-
+//logout
 router.delete('/logout', authenticate,(req, res) => {
     
     req.user.removeToken(req.token).then(() => {
@@ -89,50 +89,4 @@ router.get('/me', authenticate, (req, res) => {
   });
  
   
-
-
-// router.post('/:isAdmin', (req, res) => {
-//     const tfname = req.body.fname;
-//     const tlname = req.body.lname;
-//     const temail = req.body.email;
-//     const tpassword = req.body.password;
-//     const timage = req.body.image;
-//     const tisAdmin = req.params.isAdmin;
-//     const user = new User({
-//         fname: tfname,
-//         lname: tlname,
-//         email: temail,
-//         password: tpassword,
-//         image: timage,
-//         isAdmin: tisAdmin
-//     });
-//     user.save((err) => {
-//         if(!err) res.send("User was saved successfully");
-//         else res.send("Error while saving");
-//     });
-// });
-
-// router.put('/:id',(req, res) => {
-//     const tfname = req.body.fname;
-//     const tlname = req.body.lname;
-//     const temail = req.body.email;
-//     const tpassword = req.body.password;
-//     const timage = req.body.image;
-//     const id = req.params.id;
-//     User.updateOne({_id:id}, { $set: {fname: tfname, lname: tlname, email: temail, password: tpassword, image: timage} }, (err) => {
-//         if(!err) res.send("Updated Successfully");
-//         else res.send("Failed to update");
-//     })
-// })
-
-// router.delete('/:id', (req, res) => {
-//     const id = req.params.id;
-//     User.deleteOne({ _id: id }, (err) => {
-//         if (!err) res.send('Deleted Successfully');
-//         else{
-//             res.send("Error Occured");
-//         }
-//     })
-// })
-
 module.exports = router;

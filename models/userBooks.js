@@ -11,4 +11,4 @@ const userBookSchema = new Schema({
 
 const UserBook = mongoose.model('UserBook', userBookSchema);
 
-module.exports = UserBook;
+module.exports = UserBook; 

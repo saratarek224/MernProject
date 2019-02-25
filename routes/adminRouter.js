@@ -5,8 +5,8 @@ const Admin = require('../models/user');
 const Catogry = require('../models/catogry');
 const Book = require('../models/book');
 const Author = require('../models/author');
-
-router.get('/', (req, res) => {
+const authenticate=require('../middleWare/authenticate');
+router.get('/', authenticate,(req, res) => {
     Catogry.find({}, (err, cats) => {
         if (!err) res.send(cats);
         else{
@@ -16,7 +16,19 @@ router.get('/', (req, res) => {
 });
 
 
-router.get('/catgory', (req, res) => {
+//Login
+router.post('/login',(req,res)=>{
+    var body = _.pick(req.body,['email','password']);  
+    Admin.findByAdmin(body.email,body.password).then((user)=>{
+     return user.generateAuthToken().then((token)=>{
+      res.header('x-auth', token).send(user);
+     });
+    }).catch((e)=>{
+      res.status(400).send(e);
+    });
+  });
+
+router.get('/catgory', authenticate, (req, res) => {
     Catogry.find({}, (err, cats) => {
         if (!err) {
             var catMap={value:'',label:''};
@@ -35,7 +47,7 @@ router.get('/catgory', (req, res) => {
     });
 });
 
-router.get('/books', (req, res) => {
+router.get('/books',authenticate, (req, res) => {
     Book.find({}, (err, books) => {
         if (!err) res.send(books);
         else{
@@ -43,7 +55,7 @@ router.get('/books', (req, res) => {
         }
     });
 });
-router.get('/authors', (req, res) => {
+router.get('/authors', authenticate,(req, res) => {
     Author.find({}, (err, authors) => {
         if (!err) res.send(authors);
         else{
@@ -52,7 +64,7 @@ router.get('/authors', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', authenticate,(req, res) => {
     const _email = req.body.email;
     const _password = req.body.password;
     Admin.find({ email: _email },(err,admin)=>{
@@ -70,7 +82,7 @@ router.post('/', (req, res) => {
     })
 });
 
-router.post('/book', (req, res) => {
+router.post('/book', authenticate, (req, res) => {
     const name1 = req.body.name;
     const image1 = req.body.image;
     const catId1 = req.body.catId;
@@ -90,7 +102,7 @@ router.post('/book', (req, res) => {
     })
 });
 
-router.post('/catgory', (req, res) => {
+router.post('/catgory', authenticate,(req, res) => {
     const name1 = req.body.name;
     const catogry = new Catogry({
         name: name1,
@@ -103,7 +115,7 @@ router.post('/catgory', (req, res) => {
     })
 });
 
-router.post('/author', (req, res) => {
+router.post('/author', authenticate,(req, res) => {
     const fname1 = req.body.fname;
     const lname1 = req.body.lname;
     const email1 = req.body.email;
@@ -123,7 +135,7 @@ router.post('/author', (req, res) => {
         }
     })
 });
-router.put('/book/:id', (req, res) => {
+router.put('/book/:id', authenticate,(req, res) => {
     const name = req.body.name;
     const catId = req.body.catid;
     const authId = req.body.authid;
@@ -137,7 +149,7 @@ router.put('/book/:id', (req, res) => {
     });
 });
 
-router.put('/catgory/:id', (req, res) => {
+router.put('/catgory/:id', authenticate,(req, res) => {
     const name = req.body.name;
     const id = req.params.id;
     Catogry.updateOne({ _id: id }, { $set: { name: name } }, (err) => {
@@ -148,7 +160,7 @@ router.put('/catgory/:id', (req, res) => {
     });
 });
 
-router.put('/author/:id', (req, res) => {
+router.put('/author/:id', authenticate, (req, res) => {
     const fname = req.body.fname;
     const lname = req.body.lname;
     const dataOfBirth = req.body.dataOfBirth;
@@ -162,7 +174,7 @@ router.put('/author/:id', (req, res) => {
     });
 });
 
-router.delete('/book/:id', (req, res) => {
+router.delete('/book/:id',authenticate , (req, res) => {
     const id = req.params.id;
     Book.deleteOne({ _id: id }, (err) => {
         if (!err) res.send('Book Deleted');
@@ -172,7 +184,7 @@ router.delete('/book/:id', (req, res) => {
     })
 })
 
-router.delete('/catgory/:id', (req, res) => {
+router.delete('/catgory/:id', authenticate,(req, res) => {
     const id = req.params.id;
     Catogry.deleteOne({ _id: id }, (err) => {
         if (!err) res.send('catgory Deleted');
@@ -182,7 +194,7 @@ router.delete('/catgory/:id', (req, res) => {
     })
 })
 
-router.delete('/author/:id', (req, res) => {
+router.delete('/author/:id', authenticate,(req, res) => {
     const id = req.params.id;
     Author.deleteOne({ _id: id }, (err) => {
         if (!err) res.send('author Deleted');
