@@ -148,7 +148,7 @@ router.put('/catgory/:id', (req, res) => {
     });
 });
 
-router.post('/author/:id', (req, res) => {
+router.put('/author/:id', (req, res) => {
     const fname = req.body.fname;
     const lname = req.body.lname;
     const dataOfBirth = req.body.dataOfBirth;
@@ -162,7 +162,7 @@ router.post('/author/:id', (req, res) => {
     });
 });
 
-router.get('/book/:id', (req, res) => {
+router.delete('/book/:id', (req, res) => {
     const id = req.params.id;
     Book.deleteOne({ _id: id }, (err) => {
         if (!err) res.send('Book Deleted');

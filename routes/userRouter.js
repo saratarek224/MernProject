@@ -6,7 +6,7 @@ const User = require('../models/user');
 const multer = require("multer");
 const cloudinary = require("cloudinary");
 const cloudinaryStorage = require("multer-storage-cloudinary");
-var {authenticate}=require('../middleWare/authenticate');
+const authenticate=require('../middleWare/authenticate');
  
 
 
@@ -24,8 +24,10 @@ const storage = cloudinaryStorage({
   });
 const parser = multer({ storage: storage });
 
+
+
 router.post('/image', parser.single("image"), (req, res) => {
-  console.log(req.file) ;
+  console.log(req.file);
   const image = {};
   image.url = req.file.url;
   image.id = req.file.public_id;
@@ -73,9 +75,18 @@ router.post('/create', (req, res) => {
 
   });
 
-// router.get('/me', authenticate, (req, res) => {
-//     res.send(req.user);
-//   });
+router.delete('/logout', authenticate,(req, res) => {
+    
+    req.user.removeToken(req.token).then(() => {
+      res.status(200).send();
+    }, () => {
+      res.status(400).send();
+    });
+});
+
+router.get('/me', authenticate, (req, res) => {
+    res.send(req.user);
+  });
  
   
 
