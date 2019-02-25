@@ -5,10 +5,6 @@ const _ = require('lodash');
 const bcrypt=require('bcryptjs');
 const Schema = mongoose.Schema;
 
-
-
-
-
 const userSchema = new Schema({
   fname: String,
   lname: String,
@@ -60,7 +56,7 @@ userSchema.methods.generateAuthToken = function () {
 
 
 userSchema.statics.findByToken=function(token){
-  var User=this;
+  var User=this; 
   var decoded;
   try{
 
@@ -68,7 +64,7 @@ userSchema.statics.findByToken=function(token){
   }catch(e){
     return new Promise((resolve,reject)=>{
       reject();
-    })
+    })                                                                                                                            
 
   }
 
@@ -79,7 +75,28 @@ userSchema.statics.findByToken=function(token){
       'tokens.access':'auth' 
     }
   )
-}
+};
+
+
+userSchema.statics.findByEmail = function (email, password) {
+  var User = this;
+
+  return User.findOne({email}).then((user) => {
+    if (!user) {
+      return Promise.reject();
+    }
+
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res) {
+          resolve(user);
+        } else {
+          reject();
+        }
+      });
+    });
+  });
+};
 userSchema.pre('save',function(next){
     var user = this;
     if(user.isModified('password')){
