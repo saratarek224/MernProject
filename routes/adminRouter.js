@@ -101,7 +101,33 @@ router.post('/book', authenticate, (req, res) => {
         }
     })
 });
-
+// router.post('/book', (req, res) => {
+//     const name1 = req.body.name;
+//     const image1 = req.body.image;
+//     // const catId1 = req.body.catId;
+//     // const authId1 = req.body.authId;
+//     Author.findById(req.body.authId, (err,author) => {
+//         if(!err) {
+//             Catogry.findById(req.body.catId , (err,category) => {
+//                 if(!err) {
+//                     const book = new Book({
+//                         name: name1,
+//                         image: image1,
+//                         catId:category,
+//                         authId:author,
+//                         avgRate:0
+//                     })
+//                     book.save((err) => {
+//                         if (!err) res.send('book was saved');
+//                         else{
+//                             res.send(err);
+//                         }
+//                     })
+//                 }
+//             })
+//         }
+//     });
+// });
 router.post('/catgory', authenticate,(req, res) => {
     const name1 = req.body.name;
     const catogry = new Catogry({

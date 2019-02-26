@@ -7,6 +7,7 @@ const multer = require("multer");
 const cloudinary = require("cloudinary");
 const cloudinaryStorage = require("multer-storage-cloudinary");
 const authenticate=require('../middleWare/authenticate');
+const BookReview = require('../models/bookReview');
  
 
 
@@ -50,14 +51,20 @@ router.get('/', (req, res) => {
 
 //Login
 router.post('/login',(req,res)=>{
+  console.log("heelo login");
   var body = _.pick(req.body,['email','password']);  
+  console.log("heelo");
   User.findByEmail(body.email,body.password).then((user)=>{
+    console.log("heelo usre");
    return user.generateAuthToken().then((token)=>{
     res.header('x-auth', token).send(user);
+    console.log("heelo amar");
    });
   }).catch((e)=>{
+    console.log("heelo catxh");
     res.status(400).send(e);
   }); 
+  
 });
  
 //signUP 
@@ -87,6 +94,24 @@ router.delete('/logout', authenticate,(req, res) => {
 router.get('/me', authenticate, (req, res) => {
     res.send(req.user);
   });
+
+  router.post('/bookReview', authenticate, (req, res) => {
+    const userId1 = req.body.userId;
+    const bookId1 = req.body.bookId;
+    const review1 = req.body.review;
+    console.log(review1);
+    const bookReview = new BookReview({
+        userId: userId1,
+        bookId: bookId1,
+        review: review1,
+    });
+    bookReview.save((err) => {
+        if (!err) res.send('bookReview was saved');
+        else{
+            res.send("an error occured");
+        }
+    })
+});
  
   
 module.exports = router;
