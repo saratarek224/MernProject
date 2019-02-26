@@ -1,0 +1,32 @@
+
+body{
+    height: 500px;
+}.table-striped{
+    background-color: #ee7530;
+    width: 350px;
+}
+
+h1{
+    color:#000;
+    background-color: #fff;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-right:150px;
+    font-size: 40px;
+ width: 150px;
+}
+.td{
+    color:#fff;
+    font-size: 25px;
+    font-family: fantasy;
+    width:none;
+}
+.authorname{
+    color:#fff;
+}
+/* .p{
+    background-color: #ee7530;
+    border: #ee7530;
+    margin:10px;
+    border: 20px;
+    border-style: solid
+} */
