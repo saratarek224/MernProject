@@ -1,0 +1,224 @@
+html{
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height: 100%;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.banner {
+    background: url(../images/banner.jpg) center 0 no-repeat;
+    text-align: center;
+    height: 800px;
+    max-height: 930px;
+}
+.shadow{
+  top: 225px;
+  background: url(../images/shadow.png) 0 0 repeat;
+  height: 224px;
+  margin: 0 auto;
+  overflow: hidden;
+  top: 0;
+  height: 100%;
+}
+.banner .shadow .title1{
+  color: #fff;
+  font: 700 58px/70px 'Roboto Slab';
+  padding-top: 350px;
+}
+.container{
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+.container .card-body {
+  background-color: white;
+  color: #ee7300;
+}
+.container .card-body .card-title {
+  font-size: 30px;
+}
+.container .card-body .card-text {
+  color: white;
+  font-weight: bold;
+  font-size: medium;
+}
+.aboutus .new_card {
+  box-shadow: none;
+}
+.aboutus .new_card  img{
+  width: 350px;
+  height: 250px;
+  margin: 0 auto;
+}
+.aboutus .new_card .about-title{
+  font-size: 40px;
+}
+.aboutus .new_card .about-body{
+  font-size: 18px;
+}
+.popular {
+  background: url(../images/bg1.jpg) 0 0 repeat;
+}
+.book-container{
+  padding-top: 80px;
+  margin: 0 auto;
+}
+.cards_container {
+  display: flex;
+}
+.categoryName {
+  text-align: center;
+  padding-top: 60px;
+  text-transform: capitalize;
+}
+.footer{
+  height: 40px;
+  background-color: #f2f2f2;
+  text-align: center;
+}
+.book-detailes .new_card {
+  box-shadow: none;
+}
+.book-detailes .book-rating {
+  background-color: #f18f4f;
+}
+.book-detailes .book-rating option {
+  background-color: #f2f2f2;
+}
+.new_card .reviews {
+  background-color: #aeaeaecc;
+  padding: 40px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+.new_card .review-bg {
+  background: url(../images/shadow.png) 0 0 repeat;
+  overflow: hidden;
+  top: 0;
+  height: 100%;
+}
+.new_card h1 
+{
+  display: block;
+
+padding: .5rem 1rem;
+
+color: #f19138;
+
+font-weight: bold;
+
+text-align: center;
+
+text-transform: capitalize;
+}
+.book-container .card-img-top{
+  border-radius: 15px;
+}
+.lpagination {
+  display: inline-block;
+}
+
+.lpagination span  {
+    color: black;
+    
+    padding: 8px 16px;
+    text-decoration: none;
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+    border: 1px solid #f19138;
+    font-size: 22px;
+    border-radius: 20px;
+    color: black;
+}
+.pag {
+  margin: 0 auto;
+  width: 14%;
+}
+.lpagination span.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+.pagination_points {
+  background-color: orange;
+
+width: 50px;
+
+height: 50px;
+
+border-radius: 5px;
+
+border: none;
+margin: 30px;
+}
+
+.nav-link {
+  display: block;
+
+padding: .5rem 1rem;
+
+color: black;
+
+font-weight: bold;
+
+text-align: center;
+
+text-transform: capitalize;
+}
+
+.general-bg{
+  background: url(../images/banner.jpg) center 0 no-repeat;
+    text-align: center;
+    height: 900px;
+    max-height: 930px;
+}
+
+.bg-shadow {
+  background-color: #aeaeae80;
+}
+.general-bg .row-bg {
+  background: none !important;
+}
+.cat-head{
+  font-size: 25px;
+  color: #ee7300;
+  text-transform: capitalize;
+  font-weight: bold;
+  text-align: center;
+}

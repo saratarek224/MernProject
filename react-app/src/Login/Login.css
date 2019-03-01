@@ -1,0 +1,39 @@
+.Login{
+  background: url(../images/banner.jpg) center 0 no-repeat;
+  text-align: center;
+  height: 800px;
+  max-height: 930px;
+}
+.cover{
+background: url(../images/shadow.png) 0 0 repeat;
+margin-top: -60px;
+overflow: hid1den;
+top: 0;
+height: 133%;
+}
+
+@media all and (min-width: 480px) {
+  .Login {
+    padding: 60px 0;
+  }
+
+  .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+    padding-top: 120px;
+    color: white;
+  }
+  .login-bg{
+      background-color: #7171718c;
+      /* width: 350px; */
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 10px;
+  }
+  .Login .cover .login-bg .form-btn {
+      background-color: #c8661fb8 !important;
+  }
+}
+.form-label {
+  float: left;
+}
